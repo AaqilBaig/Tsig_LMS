@@ -2,11 +2,13 @@ import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import MenteeAcc from "./MenteeAcc";
+import Admin from "../../../backend/src/models/Admin";
 
 const MenteeAccordion = ({ mentees, onFilterChange }) => {
+  const user = JSON.parse(localStorage.getItem('adminData'));
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('name-asc');
-  const [selectedDomain, setSelectedDomain] = useState('');
+  const [selectedDomain, setSelectedDomain] = useState(`${user.domain}`);
   
   // Extract unique domains from mentees
   const domains = useMemo(() => {
